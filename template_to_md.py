@@ -30,11 +30,8 @@ def main(source_file):
 			new_item['type'] = item['type']
 			new_item['key'] = item['key'].replace('\n', ' ')
 
-			if 'description' in item:
-				new_item['description'] = item['description'].replace('\n', ' ')
-			else:
-				new_item['description'] = '<p>LLD</p>'
-
+			new_item['description'] = item.get('description', '<p>LLD</p>').replace('\n', ' ')
+			
 			items.append(new_item)
 
 			if 'triggers' in item:
@@ -43,10 +40,8 @@ def main(source_file):
 					new_trigger['name'] = trigger['name']
 					new_trigger['expression'] = '<p>**Expression**: ' + trigger['expression'].replace('\n', ' ') + '</p>'
 					new_trigger['priority'] = trigger['priority']
-					if 'description' in trigger:
-						new_trigger['description'] = trigger['description'].replace('\n', ' ')
-					else:
-						new_trigger['description'] = '<p>-</p>'
+
+					new_trigger['description'] = trigger.get('description', '<p>-</p>').replace('\n', ' ')
 
 					if 'recovery_expression' in trigger:
 						new_trigger['recovery_expression'] = ('<p>**Recovery expression**: ' + trigger['recovery_expression'].replace('\n', ' ') + '</p>')
@@ -61,7 +56,7 @@ def main(source_file):
 			new_discovery['name'] = discovery['name']
 			new_discovery['key'] = discovery['key']
 			new_discovery['type'] = discovery['type']
-			new_discovery['description'] = discovery['description'].replace('\n', ' ')
+			new_discovery['description'] = discovery.get('description', '').replace('\n', ' ')
 
 			discoveries.append(new_discovery)
 
@@ -71,7 +66,7 @@ def main(source_file):
 					new_item['name'] = item['name']
 					new_item['type'] = item['type']
 					new_item['key'] = item['key'].replace('\n', ' ') + '<p>LLD</p>'
-					new_item['description'] = item['description'].replace('\n', ' ')
+					new_item['description'] = item.get('description', '').replace('\n', ' ')
 
 					items.append(new_item)
 
@@ -81,7 +76,7 @@ def main(source_file):
 					new_trigger['name'] = trigger['name']
 					new_trigger['expression'] = '<p>**Expression**: ' + trigger['expression'].replace('\n', ' ') + '</p>'
 					new_trigger['priority'] = trigger['priority']
-					new_trigger['description'] = trigger['description'].replace('\n', ' ')
+					new_trigger['description'] = trigger.get('description', '').replace('\n', ' ')
 
 					if 'recovery_expression' in trigger:
 						new_trigger['expression'] += ('<p>**Recovery expression**: ' + trigger['recovery_expression'].replace('\n', ' ') + '</p>')
@@ -94,10 +89,7 @@ def main(source_file):
 			new_macro = {}
 			new_macro['name'] = macro['macro']
 			new_macro['value'] = macro['value'].replace('|',r'\|')
-			if 'description' in macro:
-				new_macro['description'] = macro['description'].replace('\n', ' ')
-			else:
-				new_macro['description'] = '<p>-</p>'
+			new_macro['description'] = macro.get('description', '<p>-</p>').replace('\n', ' ')
 
 			macros.append(new_macro) 
 
