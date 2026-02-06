@@ -19,7 +19,7 @@ def main(source_file):
 
 	for template in templates:
 		template_name = template['name']
-		template_descr = template['description']
+		template_descr = template.get('description', '')
 
 		items = []
 		triggers = []
@@ -140,4 +140,5 @@ if __name__ == "__main__":
 	source_file = sys.argv[1]
 	
 	main(source_file)
+
 
