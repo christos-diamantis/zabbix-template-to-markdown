@@ -88,7 +88,8 @@ def main(source_file):
 		for macro in template['macros']:
 			new_macro = {}
 			new_macro['name'] = macro['macro']
-			new_macro['value'] = macro['value'].replace('|',r'\|')
+			# Handle missing 'value' field with a default
+			new_macro['value'] = macro.get('value', '').replace('|',r'\|')
 			new_macro['description'] = macro.get('description', '<p>-</p>').replace('\n', ' ')
 
 			macros.append(new_macro) 
@@ -139,3 +140,4 @@ if __name__ == "__main__":
 	source_file = sys.argv[1]
 	
 	main(source_file)
+
