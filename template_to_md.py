@@ -85,14 +85,15 @@ def main(source_file):
 
 		macros = []
 
-		for macro in template['macros']:
-			new_macro = {}
-			new_macro['name'] = macro['macro']
-			# Handle missing 'value' field with a default
-			new_macro['value'] = macro.get('value', '').replace('|',r'\|')
-			new_macro['description'] = macro.get('description', '<p>-</p>').replace('\n', ' ')
+		if 'macros' in template:
+			for macro in template['macros']:
+				new_macro = {}
+				new_macro['name'] = macro['macro']
+				# Handle missing 'value' field with a default
+				new_macro['value'] = macro.get('value', '').replace('|',r'\|')
+				new_macro['description'] = macro.get('description', '<p>-</p>').replace('\n', ' ')
 
-			macros.append(new_macro) 
+				macros.append(new_macro) 
 
 
 	final_md_file = ''
@@ -140,5 +141,6 @@ if __name__ == "__main__":
 	source_file = sys.argv[1]
 	
 	main(source_file)
+
 
 
